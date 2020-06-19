@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Prom Development Setup With Jdk8 | Adam Burke’s Research Notes</title>
+<meta name="generator" content="Jekyll v3.8.7" />
+<meta property="og:title" content="Prom Development Setup With Jdk8" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="These are the steps I followed to checkout, compile and run ProM 6.9 as a project in Eclipse. I followed the steps here: https://svn.win.tue.nl/trac/prom/wiki/setup/HowToBecomeAProMDeveloper" />
+<meta property="og:description" content="These are the steps I followed to checkout, compile and run ProM 6.9 as a project in Eclipse. I followed the steps here: https://svn.win.tue.nl/trac/prom/wiki/setup/HowToBecomeAProMDeveloper" />
+<link rel="canonical" href="http://localhost:4000/2020/06/19/ProM-development-setup-with-JDK8.html" />
+<meta property="og:url" content="http://localhost:4000/2020/06/19/ProM-development-setup-with-JDK8.html" />
+<meta property="og:site_name" content="Adam Burke’s Research Notes" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-06-19T00:00:00+10:00" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","headline":"Prom Development Setup With Jdk8","dateModified":"2020-06-19T00:00:00+10:00","datePublished":"2020-06-19T00:00:00+10:00","url":"http://localhost:4000/2020/06/19/ProM-development-setup-with-JDK8.html","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2020/06/19/ProM-development-setup-with-JDK8.html"},"description":"These are the steps I followed to checkout, compile and run ProM 6.9 as a project in Eclipse. I followed the steps here: https://svn.win.tue.nl/trac/prom/wiki/setup/HowToBecomeAProMDeveloper","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Adam Burke's Research Notes" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Adam Burke&#39;s Research Notes</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Prom Development Setup With Jdk8</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2020-06-19T00:00:00+10:00" itemprop="datePublished">Jun 19, 2020
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>These are the steps I followed to checkout, compile and run ProM 6.9 as a project in Eclipse. I followed the steps here:
+<a href="https://svn.win.tue.nl/trac/prom/wiki/setup/HowToBecomeAProMDeveloper">https://svn.win.tue.nl/trac/prom/wiki/setup/HowToBecomeAProMDeveloper</a></p>
+
+<p>… but a few things have changed. I also had a new machine I was working with, which is always good for catching environmental setup assumptions.</p>
+
+<h2 id="setting-up-the-prom-development-environment-with-java-8">Setting up the ProM development environment with Java 8</h2>
+
+<h3 id="install-jdk">Install JDK</h3>
+
+<p>Download and install the latest Oracle Java Development Kit (JDK) version 8. This was jdk 1.8.0u251 for me. This is the current suggested environment for ProM development.</p>
+
+<p>I prefer to put development tools under their own dedicated area, like <code class="language-plaintext highlighter-rouge">c:\working\tools\jdk1.8.0u251</code>, but it should work when installed in the default location.</p>
+
+<p>The Java Runtime Environment (JRE) comes bundled with the JDK.</p>
+
+<p>There are a number of Java versions after 8 (current is actually 14). It’s possible to run under later JREs but I found things didn’t work out of the box when developing with them. More notes on this at the end. I also saw problems with the OpenJDK, but didn’t spend much time troubleshooting.</p>
+
+<h3 id="install-eclipse">Install Eclipse</h3>
+
+<p>Install Eclipse, an open source IDE for Java and other things. I installed 2020-03 (4.15.0). Eclipse requires a JRE.</p>
+
+<h3 id="install-ivy">Install Ivy</h3>
+
+<p>Install the IvyDE Eclipse plugin. Ivy is a dependency manager used by ProM.</p>
+
+<p>In Eclipse, choose Help -&gt; Install New Software -&gt; Add … -&gt; 
+	<a href="http://www.apache.org/dist/ant/ivyde/updatesite">http://www.apache.org/dist/ant/ivyde/updatesite</a></p>
+
+<p>Select the IvyDE plugin and install. You may have to restart Eclipse after install.</p>
+
+<p>IvyDE is on the Eclipse marketplace at 
+	<a href="https://marketplace.eclipse.org/content/apache-ivyde%E2%84%A2">https://marketplace.eclipse.org/content/apache-ivyde%E2%84%A2</a>
+… but I found this didn’t work with the latest version of Eclipse. Hence the install site approach above.</p>
+
+<p>The home of the Ivy project is <a href="https://ant.apache.org/ivy/ivyde/index.html">https://ant.apache.org/ivy/ivyde/index.html</a></p>
+
+<h3 id="install-subclipse">Install Subclipse</h3>
+
+<p>Install the Subclipse Eclipse plugin. Subclipse integrates Eclipse with Subversion. Subversion is the version control system used by ProM.</p>
+
+<p>In Eclipse, choose Help -&gt; Install New Software -&gt; Add … -&gt; 
+	<a href="https://dl.bintray.com/subclipse/releases/subclipse/latest/">https://dl.bintray.com/subclipse/releases/subclipse/latest/</a></p>
+
+<p>Choose Core SVNKit Library and Subclipse and install.</p>
+
+<p>You may have to restart Eclipse after install.</p>
+
+<p>The home of the Subclipse project is now <a href="https://github.com/subclipse/subclipse">https://github.com/subclipse/subclipse</a></p>
+
+<h3 id="checkout-prom">Checkout ProM</h3>
+
+<p>In Eclipse, File -&gt; New -&gt; Project -&gt; Other -&gt; SVN -&gt; Checkout Projects from SVN</p>
+
+<p>Create a new repository location
+<a href="https://svn.win.tue.nl/repos/prom">https://svn.win.tue.nl/repos/prom</a></p>
+
+<p>Browse to <code class="language-plaintext highlighter-rouge">Packages/Workshop/Trunk</code></p>
+
+<p>Next -&gt; Check out as a project in the workspace</p>
+
+<p>Keep the project name Workshop as it makes some later steps easier</p>
+
+<p>-&gt; Finish</p>
+
+<h3 id="build-prom">Build ProM</h3>
+
+<p>Once the project has finished checking out, right click on <code class="language-plaintext highlighter-rouge">ivy.xml</code> -&gt; Add Ivy Library</p>
+
+<p>If this works, it will download many libraries. This will show in the bottom right “Console” pane.</p>
+
+<p>If not, you can choose Project -&gt; Build All.</p>
+
+<p>If the build step worked, under the Problem tab you should see no Errors and, at time of writing, 8 warnings, mostly about generics.</p>
+
+<h3 id="run-prom">Run ProM</h3>
+
+<p>In Eclipse, choose the Play button -&gt; ProM with UITopia</p>
+
+<p>If this works, it will download many packages. This will show in the bottom right Console pane.</p>
+
+<p>When it is finished, you will see the main ProM screen.</p>
+
+<p>At this point the environment should be ready.</p>
+
+<h2 id="later-jdk-versions">Later JDK versions</h2>
+
+<p>There are some changes already made to ProM to run under Java 9 and later. I found some problems building under JDK 14, even with the Java compiler version set to Java 9. These seem to be around XML libraries no longer being bundled with Java in Java 9 onwards.  There is more detail at the <a href="http://www.promtools.org/doku.php?id=troubleshooting:start">ProM site</a> about changes to the runtime. These aren’t quite enough for compile-time, but as it’s not runnning on my machine right now, I’ll save that for another post.</p>
+
+
+  </div><a class="u-url" href="/2020/06/19/ProM-development-setup-with-JDK8.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Adam Burke&#39;s Research Notes</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Adam Burke&#39;s Research Notes</li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/adamburkegh"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">adamburkegh</span></a></li><li><a href="https://www.twitter.com/AdamBurkeware"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">AdamBurkeware</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Notes on software and research.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

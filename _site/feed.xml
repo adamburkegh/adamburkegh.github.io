@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.7">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-06-19T12:35:55+10:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Adam Burke’s Research Notes</title><subtitle>Notes on software and research.</subtitle><entry><title type="html">Prom Development Setup With Jdk8</title><link href="http://localhost:4000/2020/06/19/ProM-development-setup-with-JDK8.html" rel="alternate" type="text/html" title="Prom Development Setup With Jdk8" /><published>2020-06-19T00:00:00+10:00</published><updated>2020-06-19T00:00:00+10:00</updated><id>http://localhost:4000/2020/06/19/ProM-development-setup-with-JDK8</id><content type="html" xml:base="http://localhost:4000/2020/06/19/ProM-development-setup-with-JDK8.html">&lt;p&gt;These are the steps I followed to checkout, compile and run ProM 6.9 as a project in Eclipse. I followed the steps here:
+&lt;a href=&quot;https://svn.win.tue.nl/trac/prom/wiki/setup/HowToBecomeAProMDeveloper&quot;&gt;https://svn.win.tue.nl/trac/prom/wiki/setup/HowToBecomeAProMDeveloper&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;… but a few things have changed. I also had a new machine I was working with, which is always good for catching environmental setup assumptions.&lt;/p&gt;
+
+&lt;h2 id=&quot;setting-up-the-prom-development-environment-with-java-8&quot;&gt;Setting up the ProM development environment with Java 8&lt;/h2&gt;
+
+&lt;h3 id=&quot;install-jdk&quot;&gt;Install JDK&lt;/h3&gt;
+
+&lt;p&gt;Download and install the latest Oracle Java Development Kit (JDK) version 8. This was jdk 1.8.0u251 for me. This is the current suggested environment for ProM development.&lt;/p&gt;
+
+&lt;p&gt;I prefer to put development tools under their own dedicated area, like &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;c:\working\tools\jdk1.8.0u251&lt;/code&gt;, but it should work when installed in the default location.&lt;/p&gt;
+
+&lt;p&gt;The Java Runtime Environment (JRE) comes bundled with the JDK.&lt;/p&gt;
+
+&lt;p&gt;There are a number of Java versions after 8 (current is actually 14). It’s possible to run under later JREs but I found things didn’t work out of the box when developing with them. More notes on this at the end. I also saw problems with the OpenJDK, but didn’t spend much time troubleshooting.&lt;/p&gt;
+
+&lt;h3 id=&quot;install-eclipse&quot;&gt;Install Eclipse&lt;/h3&gt;
+
+&lt;p&gt;Install Eclipse, an open source IDE for Java and other things. I installed 2020-03 (4.15.0). Eclipse requires a JRE.&lt;/p&gt;
+
+&lt;h3 id=&quot;install-ivy&quot;&gt;Install Ivy&lt;/h3&gt;
+
+&lt;p&gt;Install the IvyDE Eclipse plugin. Ivy is a dependency manager used by ProM.&lt;/p&gt;
+
+&lt;p&gt;In Eclipse, choose Help -&amp;gt; Install New Software -&amp;gt; Add … -&amp;gt; 
+	&lt;a href=&quot;http://www.apache.org/dist/ant/ivyde/updatesite&quot;&gt;http://www.apache.org/dist/ant/ivyde/updatesite&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Select the IvyDE plugin and install. You may have to restart Eclipse after install.&lt;/p&gt;
+
+&lt;p&gt;IvyDE is on the Eclipse marketplace at 
+	&lt;a href=&quot;https://marketplace.eclipse.org/content/apache-ivyde%E2%84%A2&quot;&gt;https://marketplace.eclipse.org/content/apache-ivyde%E2%84%A2&lt;/a&gt;
+… but I found this didn’t work with the latest version of Eclipse. Hence the install site approach above.&lt;/p&gt;
+
+&lt;p&gt;The home of the Ivy project is &lt;a href=&quot;https://ant.apache.org/ivy/ivyde/index.html&quot;&gt;https://ant.apache.org/ivy/ivyde/index.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;install-subclipse&quot;&gt;Install Subclipse&lt;/h3&gt;
+
+&lt;p&gt;Install the Subclipse Eclipse plugin. Subclipse integrates Eclipse with Subversion. Subversion is the version control system used by ProM.&lt;/p&gt;
+
+&lt;p&gt;In Eclipse, choose Help -&amp;gt; Install New Software -&amp;gt; Add … -&amp;gt; 
+	&lt;a href=&quot;https://dl.bintray.com/subclipse/releases/subclipse/latest/&quot;&gt;https://dl.bintray.com/subclipse/releases/subclipse/latest/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Choose Core SVNKit Library and Subclipse and install.&lt;/p&gt;
+
+&lt;p&gt;You may have to restart Eclipse after install.&lt;/p&gt;
+
+&lt;p&gt;The home of the Subclipse project is now &lt;a href=&quot;https://github.com/subclipse/subclipse&quot;&gt;https://github.com/subclipse/subclipse&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;checkout-prom&quot;&gt;Checkout ProM&lt;/h3&gt;
+
+&lt;p&gt;In Eclipse, File -&amp;gt; New -&amp;gt; Project -&amp;gt; Other -&amp;gt; SVN -&amp;gt; Checkout Projects from SVN&lt;/p&gt;
+
+&lt;p&gt;Create a new repository location
+&lt;a href=&quot;https://svn.win.tue.nl/repos/prom&quot;&gt;https://svn.win.tue.nl/repos/prom&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Browse to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Packages/Workshop/Trunk&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Next -&amp;gt; Check out as a project in the workspace&lt;/p&gt;
+
+&lt;p&gt;Keep the project name Workshop as it makes some later steps easier&lt;/p&gt;
+
+&lt;p&gt;-&amp;gt; Finish&lt;/p&gt;
+
+&lt;h3 id=&quot;build-prom&quot;&gt;Build ProM&lt;/h3&gt;
+
+&lt;p&gt;Once the project has finished checking out, right click on &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ivy.xml&lt;/code&gt; -&amp;gt; Add Ivy Library&lt;/p&gt;
+
+&lt;p&gt;If this works, it will download many libraries. This will show in the bottom right “Console” pane.&lt;/p&gt;
+
+&lt;p&gt;If not, you can choose Project -&amp;gt; Build All.&lt;/p&gt;
+
+&lt;p&gt;If the build step worked, under the Problem tab you should see no Errors and, at time of writing, 8 warnings, mostly about generics.&lt;/p&gt;
+
+&lt;h3 id=&quot;run-prom&quot;&gt;Run ProM&lt;/h3&gt;
+
+&lt;p&gt;In Eclipse, choose the Play button -&amp;gt; ProM with UITopia&lt;/p&gt;
+
+&lt;p&gt;If this works, it will download many packages. This will show in the bottom right Console pane.&lt;/p&gt;
+
+&lt;p&gt;When it is finished, you will see the main ProM screen.&lt;/p&gt;
+
+&lt;p&gt;At this point the environment should be ready.&lt;/p&gt;
+
+&lt;h2 id=&quot;later-jdk-versions&quot;&gt;Later JDK versions&lt;/h2&gt;
+
+&lt;p&gt;There are some changes already made to ProM to run under Java 9 and later. I found some problems building under JDK 14, even with the Java compiler version set to Java 9. These seem to be around XML libraries no longer being bundled with Java in Java 9 onwards.  There is more detail at the &lt;a href=&quot;http://www.promtools.org/doku.php?id=troubleshooting:start&quot;&gt;ProM site&lt;/a&gt; about changes to the runtime. These aren’t quite enough for compile-time, but as it’s not runnning on my machine right now, I’ll save that for another post.&lt;/p&gt;</content><author><name></name></author><category term="prom" /><category term="jdk8" /><category term="eclipse" /><summary type="html">These are the steps I followed to checkout, compile and run ProM 6.9 as a project in Eclipse. I followed the steps here: https://svn.win.tue.nl/trac/prom/wiki/setup/HowToBecomeAProMDeveloper</summary></entry></feed>
