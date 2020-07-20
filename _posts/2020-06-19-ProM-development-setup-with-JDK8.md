@@ -97,3 +97,8 @@ At this point the environment should be ready.
 There are some changes already made to ProM to run under Java 9 and later. I found some problems building under JDK 14, even with the Java compiler version set to Java 9. These seem to be around XML libraries no longer being bundled with Java in Java 9 onwards.  There is more detail at the [ProM site](http://www.promtools.org/doku.php?id=troubleshooting:start) about changes to the runtime. These aren't quite enough for compile-time, but as it's not runnning on my machine right now, I'll save that for another post.
 
 
+## Update 20 July
+
+The ProM developers have folded the updated links back into their documentation on the [ProM wiki](https://svn.win.tue.nl/trac/prom/wiki/setup/HowToBecomeAProMDeveloper).
+
+
