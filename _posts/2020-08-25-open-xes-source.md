@@ -1,6 +1,6 @@
 ---
 layout: post
-title: OpenXES source code
+title: OpenXES Source Code
 tags: openxes source
 ---
 
