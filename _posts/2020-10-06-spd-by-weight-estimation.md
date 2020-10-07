@@ -4,7 +4,7 @@ layout: post
 tags: ["stochastic process mining","stochastic process discovery","stochastic Petri nets","estimators"]
 ---
  
-A focus of my current research is Stochastic Process Mining, ie, automatically discovering and analyzing process models incorporating probability from organizational event logs. One aspect of this newish area is stochastic process discovery, and I have a new paper out on this with colleagues Sander Leemans and Moe Thandar Wynn. It explores six new techniques for weight estimation with existing control flow discovery techniques like Fodina or Split Miner, outputting Generalized Stochastic Petri Nets, but using only the stochastic weighting. Some of the estimation techniques are straightforward, others less so, and they show the size of the potential solution space: just as there are many control-flow discovery algorithms, it's useful for there to be multiple stochastic process discovery algorithms in the toolbox as well. We term this approach "estimators" and ran an experimental evaluation that shows they are of comparable quality to an important existing technique \(Rogge-Solti et al, 2015\) (though narrower in outputs), generally faster, and apply to a broader range of event logs. 
+A focus of my current research is Stochastic Process Mining, ie, automatically discovering and analyzing process models incorporating probability from organizational event logs. One aspect of this newish area is stochastic process discovery, and I have a new paper out on this with colleagues Sander Leemans and Moe Thandar Wynn. It explores six new techniques for weight estimation, combining with existing control flow discovery techniques like Fodina or Split Miner. We output Generalized Stochastic Petri Nets (GSPNs), but using only the stochastic weighting. Some of the six estimation techniques are straightforward, others less so, and they show the size of the potential solution space: just as there are many control-flow discovery algorithms, it's useful for there to be multiple stochastic process discovery algorithms in the toolbox as well. We term this approach "estimators" and ran an experimental evaluation that shows they are of comparable quality to an important existing technique \(Rogge-Solti et al, 2015\) (though narrower in outputs), generally faster, and apply to a broader range of event logs. 
 
 Another aspect of interest for those in the field is applying new stochastic process conformance measures available in recent years, including Earth Movers' and Entropy measures (Leemans et al, 2019; Leemans & Polyvyanny, 2020).
 
@@ -24,7 +24,7 @@ Leemans, S. J. J., Syring, A. F., & van der Aalst, W. M. P. (2019). Earth Movers
 
 Leemans, S. J. J., & Polyvyanyy, A. (2020). Stochastic-Aware Conformance Checking: An Entropy-Based Approach. In S. Dustdar, E. Yu, C. Salinesi, D. Rieu, & V. Pant (Eds.), Advanced Information Systems Engineering (pp. 217–233). Springer International Publishing. 
 
-Rogge-Solti, A., & Weske, M. (2015). Prediction of business process durations using non-Markovian stochastic Petri nets. Information Systems, 54, 1–14. https://doi.org/10.1016/j.is.2015.04.004
+Rogge-Solti, A., & Weske, M. (2015). Prediction of business process durations using non-Markovian stochastic Petri nets. Information Systems, 54, 1–14. 
 
 
 
