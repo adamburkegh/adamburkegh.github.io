@@ -10,5 +10,5 @@ As part of this talk, I pull out some correspondences between classic unit test 
 
 Agile techniques, and DevOps techniques and tools, are a big enabler for this. For example, when hardware is a test fixture, being able to redeploy according to a repeatable playbook is the equivalent of a test setup. This is much cheaper and easier when the application team already maintain an automated deployment script as part of routine development and deployment.
 
-[Slides here](/slides//assets/structured_performance_tests_20201015.pdf).
+[Slides here](/slides/structured_performance_tests_20201015.pdf).
 
